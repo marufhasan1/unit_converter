@@ -50,9 +50,10 @@ $smQty = array_sum($allSmalleramounts);
 // print_r($allSmalleramounts);
 echo "Smaller Unit: ". $smQty.PHP_EOL ."<br>";
 // Get Smaller Quantity End Here
+
 $rrr = relation;
 $unitOut = [];
-foreach($rrr as $key => $value){
+foreach($rrr as $value){
     array_shift($rrr);
 
     $unitQty = intval($smQty / array_product($rrr));
