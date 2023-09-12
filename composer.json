@@ -1,6 +1,9 @@
 {
     "name": "marufhasan1/unitconverter",
     "description": "Custom Unit Converter",
+    "require": {
+        "php": ">=7.4"
+    },
     "autoload": {
         "psr-4": {
             "marufhasan1\\UnitConverter\\": "src/"
