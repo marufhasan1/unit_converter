@@ -1,14 +1,22 @@
 {
     "name": "marufhasan1/unitconverter",
     "description": "Custom Unit Converter",
-    "require": {
-        "php": ">=7.4"
-    },
+    "type": "composer-plugin",
+    "license": "MIT",
     "autoload": {
         "psr-4": {
-            "marufhasan1\\UnitConverter\\": "src/"
+            "Marufhasan1\\Unitconverter\\": "src/"
         }
     },
+    "authors": [
+        {
+            "name": "MD Maruf Hasan",
+            "email": "emarufhasan@gmail.com"
+        }
+    ],
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.4"
+    }
 }
