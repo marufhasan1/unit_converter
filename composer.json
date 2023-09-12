@@ -1,7 +1,7 @@
 {
     "name": "marufhasan1/unitconverter",
     "description": "Custom Unit Converter",
-    "type": "composer-plugin",
+    "type": "library",
     "license": "MIT",
     "autoload": {
         "psr-4": {
