@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+class UnitConverter {
+    constructor(labelValue) {
+        this.captions = labelValue.map(item => item.caption);
+        this.r_v = labelValue.map(item => item.value);
+    }
+
+    invoke(labelValue) {
+        this.captions = labelValue.map(item => item.caption);
+        this.r_v = labelValue.map(item => item.value);
+    }
+
+    getRootValue(quantities) {
+        const collectRootValues = [];
+        this.r_v.forEach((value, key) => {
+            if (quantities[key] !== undefined) {
+                let total = parseInt(quantities[key]);
+
+                for (let index = key + 1; index <= this.r_v.length - 1; index++) {
+                    total *= this.r_v[index];
+                }
+
+                collectRootValues.push(total);
+            }
+        });
+
+        const smQty = collectRootValues.reduce((acc, curr) => acc + curr, 0);
+        return {
+            caption: this.captions[this.captions.length - 1],
+            value: smQty
+        };
+    }
+
+    getUnitValue(quantity) {
+        const relationV = [...this.r_v];
+        const unitOut = [];
+
+        relationV.forEach(() => {
+            relationV.shift();
+            const multipRV = relationV.reduce((acc, curr) => acc * curr, 1);
+
+            const unitQty = parseInt(quantity / multipRV);
+            unitOut.push(unitQty);
+            quantity -= unitQty * multipRV;
+        });
+
+        const unitSet = this.captions.map((caption, key) => ({
+            caption: caption,
+            value: unitOut[key]
+        }));
+
+        return unitSet;
+    }
+}
+
+// Example usage:
+const labelValue = [
+    { caption: 'Meter', value: 1 },
+    { caption: 'Centimeter', value: 100 }
+];
+
+const converter = new UnitConverter(labelValue);
+const rootValue = converter.getRootValue([1,200]); // Replace with your quantities
+console.log(rootValue);
+
+const unitValue = converter.getUnitValue(150); // Replace with your quantity
+console.log(unitValue);
+
+    </script>
+</body>
+</html>
