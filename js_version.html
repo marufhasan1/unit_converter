@@ -43,35 +43,46 @@ class UnitConverter {
         const relationV = [...this.r_v];
         const unitOut = [];
 
-        relationV.forEach(() => {
-            relationV.shift();
-            const multipRV = relationV.reduce((acc, curr) => acc * curr, 1);
+        for (let i = 0; i < relationV.length; i++) {
+            const multipRV = relationV.slice(i + 1).reduce((acc, curr) => acc * curr, 1);
 
             const unitQty = parseInt(quantity / multipRV);
             unitOut.push(unitQty);
             quantity -= unitQty * multipRV;
-        });
+        }
 
-        const unitSet = this.captions.map((caption, key) => ({
-            caption: caption,
-            value: unitOut[key]
-        }));
+        const unitSet = this.captions.map((caption, key) => {
+            return {
+                caption: caption,
+                value: unitOut[key]
+            };
+        });
 
         return unitSet;
     }
 }
 
 // Example usage:
+// const labelValue = [
+//     { caption: 'Meter', value: 1 },
+//     { caption: 'Centimeter', value: 100 }
+// ];
 const labelValue = [
-    { caption: 'Meter', value: 1 },
-    { caption: 'Centimeter', value: 100 }
-];
+    {
+        "caption": "Bag",
+        "value": 1,
+    },
+    {
+        "caption": "Kg",
+        "value": 25,
+    }
+]
 
 const converter = new UnitConverter(labelValue);
 const rootValue = converter.getRootValue([1,200]); // Replace with your quantities
 console.log(rootValue);
 
-const unitValue = converter.getUnitValue(150); // Replace with your quantity
+const unitValue = converter.getUnitValue(9); // Replace with your quantity
 console.log(unitValue);
 
     </script>
